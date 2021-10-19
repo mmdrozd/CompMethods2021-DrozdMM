@@ -7,7 +7,7 @@ scriptDir="$(dirname "$0")"
 
 echo '' ; echo 'Reproduce text of paper:' ; echo ''
 
-texname=ProjectMMD
+texname=BufferStockTheory
 output_directory='LaTeX'
 
 # Make figures that get made by executing a latex file
