@@ -9,13 +9,12 @@ echo '' ; echo 'Installing requirements' ; echo ''
 echo '' ; echo 'Producing figures' ; echo ''
 
 cd "."
-ipython ProjectMMD.ipynb
+ipython BufferStockTheory.ipynb
 
 [[ -e latexdefs.tex ]] && rm -f latexdefs.tex # Delete junk file that might be created
 
-#FRom Prof Carroll's paper, but I don't think it is worthwhile to include
-#cd "Code/Python"
-#./test_Harmenbergs_method.sh
+cd "Code/Python"
+./test_Harmenbergs_method.sh
 
 
 

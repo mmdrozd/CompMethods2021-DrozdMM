@@ -33,7 +33,7 @@
 
 \keywords{Labor Supply, time allocation, habit formation}
 
-\renewcommand{\forcedate}{October 11, 2021}\date{\forcedate}
+\renewcommand{\forcedate}{November 29, 2021}\date{\forcedate}
 
 \maketitle
 \hypertarget{abstract}{}
@@ -49,16 +49,18 @@
   \parbox{0.9\textwidth}{
     \begin{center}
       \begin{tabbing}
-          \texttt{Dashboard:~} \= \= \texttt{\url{https://econ-ark.org/materials/BufferStockTheory?dashboard}} \\
-          \texttt{~~~REMARK:~} \> \> \texttt{\url{https://econ-ark.org/materials/BufferStockTheory}} \\ % Owner is defined in Resources/owner.tex
-          \texttt{~~~~~html:~} \> \> \texttt{\href{https://\owner.github.io/BufferStockTheory/}{https://\owner.github.io/BufferStockTheory/}} \\ % Owner is defined in Resources/owner.tex
-          \texttt{~~~~~~PDF:~} \> \> \texttt{\href{https://\owner.github.io/BufferStockTheory/BufferStockTheory.pdf}{https://\owner.github.io/BufferStockTheory/BufferStockTheory.pdf}} \\ % Owner is defined in Resources/owner.tex
-          \texttt{~~~Slides:~} \> \> \texttt{\href{https://\owner.github.io/BufferStockTheory/BufferStockTheory-Slides.pdf}{https://\owner.github.io/BufferStockTheory/BufferStockTheory-Slides.pdf}} \\
-          \texttt{~Appendix:~} \> \> \texttt{\href{https://\owner.github.io/BufferStockTheory\#Appendices}{https://\owner.github.io/BufferStockTheory\#Appendices}}    \\
-          \texttt{~~~GitHub:~} \> \> \texttt{\href{https://github.com/\owner/BufferStockTheory}{https://github.com/\owner/BufferStockTheory}} \\
+         % \texttt{Dashboard:~} \= \= \texttt{\url{https://econ-ark.org/materials/BufferStockTheory?dashboard}} \\
+         % \texttt{~~~REMARK:~} \> \> \texttt{\url{https://econ-ark.org/materials/BufferStockTheory}} \\ % Owner is defined in Resources/owner.tex
+         % \texttt{~~~~~html:~} \> \> \texttt{\href{https://\owner.github.io/BufferStockTheory/}{https://\owner.github.io/BufferStockTheory/}} \\ % Owner is defined in Resources/owner.tex
+          \texttt{~~~~~~PDF:~} \= \= \texttt{\href{https://github.com/mmdrozd/CompMethods2021_DrozdMM/ProjectMMD.pdf}{https://github.com/mmdrozd/CompMethods2021-DrozdMM/ProjectMMD.pdf}} \\ % Owner is defined in Resources/owner.tex
+          \texttt{~~~Slides:~} \> \>  \texttt{\href{https://github.com/mmdrozd/CompMethods2021_DrozdMM/ProjectMMD-Slides.pdf}{https://github.com/mmdrozd/CompMethods2021-DrozdMM/ProjectMMD-Slides.pdf}} \\
+        % {~Appendix:~} \> \> \texttt{\href{https://\owner.github.io/BufferStockTheory\#Appendices}{https://\owner.github.io/BufferStockTheory\#Appendices}}    \\
+          \texttt{~~~GitHub:~} \> \> \texttt{\href{https://github.com/mmdrozd/CompMethods2021-DrozdMM}{https://github.com/mmdrozd/CompMethods2021-DrozdMM}} \\
       \end{tabbing}
     \end{center}
-    The \href{https://econ-ark.org/materials/BufferStockTheory?dashboard}{dashboard} lets users see consequences of alternative parameters in an interactive framework.} % end parbox{\textwidth}
+
+   }% The \href{https://econ-ark.org/materials/BufferStockTheory?dashboard}{dashboard} lets users see consequences of alternative parameters in an interactive framework.}
+  % end parbox{\textwidth}
 \end{footnotesize}
 
 \begin{authorsinfo}
@@ -173,7 +175,7 @@ Therefore combining our results from our FOCs (Equations \eqref{eq:focc} and \eq
 \end{verbatimwrite}
 \input{\LtxDir\EqDir/eulers}
 
-% write about imposing Stone-Geary functional form
+The Equation \eqref{eq:euler_leisure} is a similar to the optimization condition in classic labor supply theory. In the traditional model, the optimizing behavior equates the ratio of the marginal utilities to the price ratio. By including habits, we gain an extra term that adjusts this condition slightly. As a matter of fact, Equation \eqref{eq:euler_leisure} reduces down to the traditional first order condition when we let $u^h=0$ (or in other words, impose that this model does not have a habit aspect).
 
 \providecommand{\figName}{stylized_model} % Allows generic definition of hypertargets based on title of figure
 \providecommand{\figFile}{\figName} %  and on filename
@@ -182,29 +184,54 @@ Therefore combining our results from our FOCs (Equations \eqref{eq:focc} and \eq
 \input{\FigDir/\figName} % Read in the tex to generate the figure
 Figure \ref{fig:stylized_model} serves as reference for the model. In essence an agent enters the period and must make a leisure-consumption decision. The leisure decision is influenced by the habit factor, $\varphi$. Upon reaching the subsequent period, the decision must be made again, but also takes into account the savings and the habit that came from the previous periods decisions.
 
+In order to continue to solve this problem, we need to impose some functional form on the utility. \cite{bover1991relaxing} uses a Stone-Geary specification, which is what I will use for consistency purposes\footnote{\cite{bover1991relaxing} writes utility as a function of labor hours instead of leisure. However, there is not much of a difference in doing so since we assume that time can be divided into either work or leisure. Therefore, we can rewrite everything in terms of labor hours and get the same expressions.}.
+\begin{verbatimwrite}{\EqDir/stone_geary}
+  \begin{align}
+    u(c_t, l_t, l_{t-1}) = B_1 \log \left(c_t - \gamma_c \right) + B_2 \log \left(l_t - \varphi l_{t-1} - \gamma_l \right) \label{eq:sg}
+  \end{align}
+\end{verbatimwrite}
+\input{\LtxDir\EqDir/stone_geary}
+$B_1$ and $B_2$ are taste parameters, and homogeneity is assumed, which means that they sum to one. As is usual in the Stone-Geary specification, the $\gamma_c$ and $\gamma_l$ parameters can be interpretted as a minimum number of consumption/leisure that the agent needs to attain. Now, we can have continue to work from our first order conditions.
 
+\begin{verbatimwrite}{\EqDir/sg_eulers}
+  \begin{align}
+    \frac{1}{c_t -\gamma_c} &=\frac{\beta(1+r)}{c_{t+1}-\gamma_c} \label{eq:sg_euler_c} \\
+    \frac{B_2}{l_t - \varphi l_{t-1} - \gamma_l} &= \frac{B_1 W}{c_t - \gamma_c} + \frac{B_2 \beta \varphi}{l_{t+1}-\varphi l_t - \gamma_l} \label{eq:sg_euler_l}
+  \end{align}
+\end{verbatimwrite}
+\input{\LtxDir\EqDir/sg_eulers}
+While Equation \eqref{eq:sg_euler_c} is a rather standard Euler equation for consumption, the habit in leisure makes Equation \eqref{eq:sg_euler_l} rather complicated. It is further complicated by the presence of a $c_t$ in Equation \eqref{eq:sg_euler_l}. This will prevent us from simplying just using the intertemporal budget constraint to give as a nice closed form solution for consumption. In any case, the difficulty of having a second control variable for this problem will call for some simplications to be made. For the following simulation exercises, I follow \cite{bover1991relaxing}. The only notational discrepancy will occur with regards to the psychological discount factor. Moving forward, $\beta=\frac{1}{1+\rho}$. 
 \hypertarget{Simulations}{}
 \section{Simulations}
-There are several abstractions made in order to simplify the simulation. In principle, we can allow for the wage to change over the life cycle (and perhaps in later renditions, we will allow for this), but for now, we focus on a constant wage. In principle, the Stone-Geary utility function can vary by demographic characteristics, we just impose that every agent has the same paramaters in their utility function (we can also adjust this with later simulations).   
+There are several abstractions made in order to simplify the simulation. In principle, we can allow for the wage to change over the life cycle (and perhaps in later renditions, we will allow for this), but for now, we focus on a constant wage. In principle, the Stone-Geary utility function can vary by demographic characteristics. In particular, Bover uses a simple linear regression of demographic observables of which the coefficients on the number of children are reported. Since that is all we have to work with (likely there are other covariates in that regression, but we just do not know their estimated coefficients), we will be restrict our agent to have the mean number of children \footnote{Likely, there my calibration of the $B_1$ and $B_2$ values are slightlty off since the calculated elasticity for the original paper (as reported in Table \ref{tab:elasts} is slightly off. But, the numbers are still extremely close, which provides confidence for a correct replication of the the \cite{bover1991relaxing} results.} Potentially in a future simulation, we can also adjust the number of children our simulated agent has\footnote{After all, the mean number of children in the original data is between one and two, which means no one actually has the mean number of children}.   
 
-In order to ensure consistency, I follow the model solution as described by \cite{bover1991relaxing}. In Column 2 of Table 1 of \cite{bover1991relaxing}, estimates of the structural parameters are presented \footnote{See the ``Original'' row of the Table \ref{tab:calibs} for the point estimates from \cite{bover1991relaxing}. It worth noting that many of the point estimates end up statistically insignificant, but yet it is through these point estimates that the author constructs the elasticity estiamtes. }
+In order to ensure consistency, I follow the model solution as described by \cite{bover1991relaxing}. In Column 2 of Table 1 of \cite{bover1991relaxing}, estimates of the structural parameters are presented \footnote{See the ``Original'' row of the Table \ref{tab:calibs} for the point estimates from \cite{bover1991relaxing}. It worth noting that many of the point estimates end up statistically insignificant, but yet it is through these point estimates that the author constructs the elasticity estimates. }.
 \input{\TableDir/calibration_table}
-Using these calibrations we are able to simulate the labor hours (and thereby the leisure hours) over the life cycle:
+Originally, \cite{bover1991relaxing} imposed that the psychological discount factor and the risk free rate werre the same, which while that is not terribly radical in and of itself, the point estimates are implausibly large. For instance, the risk-free interest rate falls in the 20\% range. Why work when you can get a 20\% riskless return.
+
+Therefore, the motivaiton for conducting simulations is clear. For one, there are natural questions that can be asked since life-cycle figures were not presented. What does this model suggest about life-cycle consumption/labor? How sensitive are the results to change in parameters? Does the life-cycle varibales change in expected ways when we adjust the parameters?
+
+In conducting my simulation, I maintain a few simplications. The agent is choosing consumption and labor for a 40-year period. This decision abstracts from reality in two obvious ways. First, there is no mortality (or probability of mortality). Second, the agent does not plan to live for a period of time without work. There is no retirement or no type of Social secuity system. Furthermore, these decisions are made with certainty. The agent knows that they will be employed at the same wage. This abstraction prevents job separation and the bargaining for higher wages. Some of these features become more standard in a more contemporary life-cycle labor supply model (see \cite{keane2016labour} for an example of a life-cycle model with these aspects included). Nonetheless, the interesting questions remain and these features provide a foundation for augmenting the habit model for a future project. 
+
+The simulations ran are calibrated according to Table \ref{tab:calibs}. The original row refers to estimated values from \cite{bover1991relaxing}. The ``realistic'' row adjusts the $\rho$ and interest factors to be more standard values. The ``counterfactual'' row adjusts the same two factors as the ``realistic'' column, but also adjusts the habit persistence parameter. Finally, the ``no habits'' row sets the habit persistence variable to zero.
+
+Using these calibrations we are able to simulate the labor hours (and thereby the leisure hours) over the life cycle.
 \renewcommand{\figName}{hours_lc}
 \renewcommand{\figFile}{\figName}
 \hypertarget{\figFile}{}
 \input{\FigDir/\figName}
+Figure \ref{fig:hours_lc} demonstrates the life cycle labor hours. Most of the specifications have (generally) the ``horseshoe'' shape in labor hours, where hours rise at the beginning of life and then fall towards the end. The Original specification most closely follows this shape by maintaining a consistent amount of hours over the life cycle except at the beginning/end. The realisitc and counterfactual specifications do not really reach a ``steady'' value of labor hours. They increase almost to the very end. A reason for this is that in the original specification, the interest rate is so high, but also being offset by the discount factor. On the other hand, the discount factor is greater in the realistic and counterfactual specifications that cause these agents to prefer consumptionn and leisure today and pay it off later. Perhaps, the most odd is how low labor hours are for the no-habit case. 
 
-
-Similarly,we can look at the consumption over the life cycle:
 
 \renewcommand{\figName}{consumption_lc}
 \renewcommand{\figFile}{\figName}
 \hypertarget{\figFile}{}
 \input{\FigDir/\figName}
+Furthermore, Figure \ref{fig:consumption_lc} presents the life-cycle consumption for all the scenarios. Only the original specification seems to produce what we might think of life-cycle consumption. All the other specifications enjoy immense consumption levels early and then must spend time working to pay off those early levels of consumption. What is interesting is that the increase in $\varphi$ in the counterfactual specificaiton leads to much higher consumption. Keep in mind that this is financed by high labor hours over the life-cycle. 
 
+% talk more about this
 
-Then with this information, we simulate the model and get the following estimates of elasticities:
+The key conslusion from \cite{bover1991relaxing} is that the including habits produces reasonable labor supply elasticity estimates. Those elasticities are recreated in Table \ref{tab:elasts}. 
 \input{\TableDir/elast_table}
 
 
