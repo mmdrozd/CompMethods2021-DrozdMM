@@ -187,7 +187,7 @@ Figure \ref{fig:stylized_model} serves as reference for the model. In essence an
 In order to continue to solve this problem, we need to impose some functional form on the utility. \cite{bover1991relaxing} uses a Stone-Geary specification, which is what I will use for consistency purposes\footnote{\cite{bover1991relaxing} writes utility as a function of labor hours instead of leisure. However, there is not much of a difference in doing so since we assume that time can be divided into either work or leisure. Therefore, we can rewrite everything in terms of labor hours and get the same expressions.}.
 \begin{verbatimwrite}{\EqDir/stone_geary}
   \begin{align}
-    u(c_t, l_t, l_{t-1}) = B_1 \log \left(c_t - \gamma_c \right) + B_2 \log \left(l_t - \varphi l_{t-1} - \gamma_l \right) \label{eq:sg}
+    u(c_t, l_t, l_{t-1}) = B_1 \log \left(l_t - \varphi l_{t-1} - \gamma_l \right)+  B_2 \log \left(c_t - \gamma_c \right)  \label{eq:sg}
   \end{align}
 \end{verbatimwrite}
 \input{\LtxDir\EqDir/stone_geary}
@@ -196,7 +196,7 @@ $B_1$ and $B_2$ are taste parameters, and homogeneity is assumed, which means th
 \begin{verbatimwrite}{\EqDir/sg_eulers}
   \begin{align}
     \frac{1}{c_t -\gamma_c} &=\frac{\beta(1+r)}{c_{t+1}-\gamma_c} \label{eq:sg_euler_c} \\
-    \frac{B_2}{l_t - \varphi l_{t-1} - \gamma_l} &= \frac{B_1 W}{c_t - \gamma_c} + \frac{B_2 \beta \varphi}{l_{t+1}-\varphi l_t - \gamma_l} \label{eq:sg_euler_l}
+    \frac{B_1}{l_t - \varphi l_{t-1} - \gamma_l} &= \frac{B_2 W}{c_t - \gamma_c} + \frac{B_1 \beta \varphi}{l_{t+1}-\varphi l_t - \gamma_l} \label{eq:sg_euler_l}
   \end{align}
 \end{verbatimwrite}
 \input{\LtxDir\EqDir/sg_eulers}
