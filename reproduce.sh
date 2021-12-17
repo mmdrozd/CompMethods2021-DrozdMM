@@ -63,6 +63,7 @@ while read appendixName; do
     fi
     eval "$cmd"
     mv "$output_directory/$filename.pdf" Appendices
+    echo ''; echo "The $filename.pdf has been moved to the Appendices folder."; echo ''
 done < /tmp/appendices
 
 [[ -e "$texname".pdf ]] && rm -f "$texname".pdf
