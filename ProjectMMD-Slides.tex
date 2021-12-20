@@ -48,7 +48,7 @@
 \title[Project MMD]{A Simple Labor-Leisure Model with Habits: Some Simulations from Previous Results}
 \author[Drozd]{Mark M. Drozd}
 \institute[JHU]{Johns Hopkins University}
-\date[\today]{December 7, 2021}
+\date[\today]{December 21, 2021}
 
 \begin{document}\bibliographystyle{\econtexBibStyle}
 
@@ -67,7 +67,7 @@
 \begin{itemize}
 \item Introduce habits into the life-cycle labor supply model
   \begin{itemize}
-  \item Already has been done (see \cite{bover1991relaxing})
+  \item Already has been done (see \cite{bover1991relaxing} and \cite{kubin2002labour})
   \end{itemize}
 \item Use the previous results to create some visualizations
   \item Change the parameter values to assess the validity of the model. 
@@ -82,23 +82,30 @@
   \begin{itemize}
   \item Risk-free rate in the 20\% range (if only this were true!)
   \end{itemize}
- \item Adjustment of wage elasticities.
+\item Slight adjustment of wage elasticities (but ultimately comparable).
+  \item Visualizations of labor hours and consumption over the life cycle.
 \end{itemize}
 \end{frame}
 
 %______________2nd section__________________
 \section{The Problem}
+\subsection{Setup}
 \begin{frame}
 \frametitle{The Problem}
 We want to maximize the following utility function
 \input{\LtxDir\EqDir/utility}
 subject to the following constraint:
 \input{\LtxDir\EqDir/budget_constraint}
-
+where $\beta = \frac{1}{1+\rho}$ is the psychological discount factor; $c_t$ is consumption; $l_t$ is leisure $h_t^l$ is the habit stock in leisure; $m_t$ is the money assets; $r$ is the risk free rate; $W$ is the wage. $y_t$ is income. $T$ is the total amount of time in a period. $D$ is the total amount of time that the agent is solving this problem. For our calibrations, we will let $D=40$.  
 \end{frame}
 \begin{frame}
   \frametitle{Bellman}
-We can rewrite this problem in Bellman form.
+  We can rewrite this problem in Bellman form.
+  \input{\LtxDir\EqDir/bellman}
+  subject  to
+  \input{\LtxDir\EqDir/dbc_single}
+  We will also assume that the habit stock is equal to the previous periods leisure.
+  $$ h_{t+1} = l_t$$
 \end{frame}
 
 
@@ -106,16 +113,53 @@ We can rewrite this problem in Bellman form.
   \frametitle{Overview--Pictorially}
   \input{\FigDir/stylized_model}
 
-  \end{frame}
+\end{frame}
+
+\subsection{Solution}
+
+\begin{frame}
+  \frametitle{FOCs, Envelope, and Euler Equations}
+  \begin{itemize}
+  \item Our first order conditions for this problem:
+    \input{\LtxDir\EqDir/focs}
+  \item Using the Envelope Theorem, we obtain the following equations.
+    \input{\LtxDir\EqDir/envelope}
+  \item All together, we get our Euler equations for this problem:
+    \input{\LtxDir\EqDir/eulers}
+  \end{itemize}
+  
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Imposing a Stone-Geary Functional Form}
+  \begin{itemize}
+  \item We impose a Stone-Geary functional form (in line with \cite{bover1991relaxing}.
+    \input{\LtxDir\EqDir/stone_geary}
+  \item This means that our Euler conditions become:
+    \input{\LtxDir\EqDir/sg_eulers}
+    \end{itemize}
+\end{frame}
+
+
 
 % _____________3rd Section____________________
 \section{Simulations}
-
+\subsection{Calibrations}
 \begin{frame}
   \frametitle{Calibrations}
   \input{\TableDir/calibration_table}
+  \begin{itemize}
+  \item Original = Calibration from \cite{bover1991relaxing}
+  \item Realistic I = Adjusted $\rho$ and $r$ with $\rho > r$
+  \item Realisitc II = Adjusted $\rho$ and $r$ with $r > \rho$
+  \item No Habit = Realistic I with $\varphi=0$
+  \end{itemize}
+  
   \end{frame}
 
+  \subsection{Figures}
+  
   \begin{frame}
     \frametitle{Life Cycle Consumption}
     \begin{center}
@@ -129,7 +173,19 @@ We can rewrite this problem in Bellman form.
       \includegraphics[width=0.8\textwidth]{\FigDir/hours_lc.png}
 \end{center}
     \end{frame}
+    \subsection{Elasticities}
 
+    \begin{frame}
+      \frametitle{Equations for Elasiticities}
+      \begin{itemize}
+      \item Note: $h_i$ (without the superscript) denotes the labor hours in period $i$.
+      \item Elasiticity for marginal utility of wealth constant (MWUC)
+        \input{\LtxDir\EqDir/epsilon_elast}
+      \item Elasticity that does not impose constant wealth
+        \input{\LtxDir\EqDir/eta_elast}
+        \end{itemize}
+    \end{frame}
+    
     \begin{frame}
       \frametitle{Elasticities}
       \input{\TableDir/elast_table}

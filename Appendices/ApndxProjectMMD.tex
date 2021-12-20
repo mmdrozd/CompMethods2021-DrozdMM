@@ -22,14 +22,14 @@ According to the solution in \cite{bover1991relaxing}, we can use Equation 7 in 
   \frac{c_t - \gamma_c}{c_{t+1}-\gamma_c} &=  \frac{\lambda_t^{-1}}{\lambda_{t+1}^{-1}}
 \end{align*}
 
-Therefore, a simple test will be to see if the ratio of the inverse lagrange multipliers is equal to $(1+\rho) / (1+r)$. The code is created using the Bover notation, which allows us to see if there are any bugs in the code.
+Therefore, a simple test will be to see if the ratio of the inverse Lagrange multipliers is equal to $(1+\rho) / (1+r)$. The code is created using the Bover notation, which allows us to see if there are any bugs in the code and verify that we do in fact converge on the same solution.
 
 \input{\FigDir/inter_consumption}
 
 Figure \ref{fig:inter_consumption} demonstrates that we do indeed observe a constant relationship between $c_t -\gamma_c$ and $c_{t+1} - \gamma_c$. Thus, we conclude that the ratio of subsequent Lagrange multipliers is $(1+\rho)/(1+r)$.
 
 
-Bover solves this problem in terms of labor hours, but this does not prove any difficulty since our time constraint will tell us that $l_t = T-h_t$. Thus, Bover's equation 6 suggests that the ratio of leisure hours will be:
+Bover solves this problem in terms of labor hours, but this does not prove any difficulty since our time constraint will tell us that $l_t = T-h_t$. Thus, Bover's Equation 6 suggests that the ratio of leisure hours will be:
 \begin{align}
   \frac{ l_t - \varphi l_{t-1} - \gamma_l}{l_{t+1} - \varphi l_t - \gamma_l} &= \frac{\lambda_t^{-1}}{\lambda_{t+1}^{-1}} \frac{w_{t+1}^{+}}{w_t^{+}} \label{eq:bover_focl}
 \end{align}

@@ -33,12 +33,12 @@
 
 \keywords{Labor Supply, time allocation, habit formation}
 
-\renewcommand{\forcedate}{November 29, 2021}\date{\forcedate}
+\renewcommand{\forcedate}{December 21, 2021}\date{\forcedate}
 
 \maketitle
 \hypertarget{abstract}{}
 \begin{abstract}
-  This paper presents a mixture of two traditional economic models: the labor-leisure model and a model of habit formation in leisure.. The hope is that this model can be used to explain labor elasticity patterns and life cycle labor supply and consumption differences. This paper is largely inspired by the work of \cite{bover1991relaxing}.
+  This paper presents a mixture of two traditional economic models: the labor-leisure model and a model of habit formation in leisure. The hope is that this model can be used to explain labor elasticity patterns and life cycle labor supply and consumption differences after adjusting some parameter values. This paper is largely inspired by the work of \cite{bover1991relaxing}.
 \end{abstract}
 
 
@@ -68,7 +68,7 @@
 \end{authorsinfo}
 
 \newcommand{\thankstext}{
-This paper is based off the template for the Theoretical Foundations of Buffer Stock Theory by Chris D. Carroll. The repository for can be found here: \href{https://github.com/llorracc/BufferStockTheory}{Template}. The paper's results \href{https://\owner.github.io/nbreproduce}{can be automatically reproduced} using the \href{https://econ-ark/HARK}{Econ-ARK/HARK} toolkit, which can be cited per our references (\cite{carroll_et_al-proc-scipy-2018}); for reference to the toolkit itself see \href{https://econ-ark.org/acknowledging/}. All errors are my own.}
+This paper is based off the template for the Theoretical Foundations of Buffer Stock Theory by Chris D. Carroll. The repository for can be found here: \href{https://github.com/llorracc/BufferStockTheory}{Template}. The paper's results using the reproduce script found in the GitHub repository, which uses the \href{https://econ-ark/HARK}{Econ-ARK/HARK} toolkit, which can be cited per our references (\cite{carroll_et_al-proc-scipy-2018}); for reference to the toolkit itself see \href{https://econ-ark.org/acknowledging/}. All errors are my own.}
 
 \ifthenelse{\boolean{Web}}{}{
   \begin{minipage}{0.9\textwidth}
@@ -80,31 +80,31 @@ This paper is based off the template for the Theoretical Foundations of Buffer S
 \hypertarget{Introduction}{}
 \section{Introduction}\label{sec:intro}
 
-The theory of labor supply tackles one of the most fundamental problems in economics: why people choose to work? Yet, as we try to abstract from the often times complex reasons why agents interact with the labor market, simple features can provide great insights to these problems. In an attempt to build some more intuition on such a basic problem, I look to model labor supply in the traditional way, but include habit formation.
+The theory of labor supply tackles one of the most fundamental problems in economics: why people choose to work? Yet, as we try to abstract from the often complex reasons why agents interact with the labor market, simple features can provide great insights to these problems. In an attempt to build some more intuition on such a basic problem, I look to model labor supply in the traditional way, but include habit formation.
 
 The habit formation story is rather intuitive when it comes to consumption. There is a sort of accustomization process in our consumption patterns (a comfort or a certainty in a stochastic world) such that deviations from such norms actually provide disutility. For example, imagine we are analyzing a consumption problem regarding groceries. Deviations from the typical amount that a household purchases for groceries can be disconcerting. For one, there might not be space in the refrigerator to store the food. For another, purchasing more food than a household might use, will make it more likely to spoil and seem like a waste of money. 
 
-In the labor supply literature, a tradeoff occurs between consumption and leisure, so the same argument justifying habit formation in consumption naturally suggests habit formation in leisure. Agents get used to a certain amount of leisure, and deviations from this amount (particularly decreases) has a large effect. In other words, you are worse off because you don't have the same amount of leisure as before. From the perspective of less leisure in the future, the increasing time demand in labor may make the time spent in leisure less valuable (i.e. when you have leisure, you are too tired from working to take advantage of it compared to your previous leisure amount). On the other hand, too much leisure (relative to a previous period) can also be counterproductive. In this sense, this increase in leisure might lead to idleness and while it may be good to relax a little bit more, the tradeoff to consumption might actually dampen the effect of this extra leisure time. In any case, it is a plausible hypothesis that there may be some degree of habit formation as consumption.
+In the labor supply literature, a tradeoff occurs between consumption and leisure, so the same argument justifying habit formation in consumption naturally suggests habit formation in leisure. Agents get used to a certain amount of leisure, and deviations from this amount (particularly decreases) has a large effect. In other words, you are worse off because you don't have the same amount of leisure as before. For example. adjusting leisure downwards may diminsh the quality of that leisure since a decrease in leisure is made up by an increase in labor hours. Perhaps, if you work too much, you become too tired to take advantage of it compared to your previous leisure amount). On the other hand, too much leisure (relative to a previous period) can also be counterproductive. In this sense, this increase in leisure might lead to idleness and while it may be good to relax a little bit more, the tradeoff to consumption might actually dampen the effect of this extra leisure time. In any case, it is a plausible hypothesis that there may be some degree of habit formation for leisure.
 
-While models of habit formation in consumption tend to dominate (put some cites here), there have been models that introduce habits in labor supply, notably \cite{bover1991relaxing}.
+There is a strong tradition of incorportating habit formation with respect to consumption\footnote{This is not a complete literature review, but rather a survey to get a taste as to how the habits model has been used in the past.}. \cite{abel1990asset} not only allows current utility to depend on past consumtpion, but also an index of past aggregate average consumption. \cite{koehne2015optimal} use a model of habit consumption and leisure to establish the effects of taxes. \cite{carroll2000saving} shows how consumption habits can be used dientangle the endogenous correlation between growth and savings. \cite{campbell1999force} shows how habits are important for understanding asset pricing (and thereby provides insight into the equity premium puzzle). That is not to say that models with habits with regards to labor supply have not considered. \cite{struck2014habit} shows that habits over the labor supply can explain the stable labor supply decision over the long run. \cite{dreyer2020saving} add savings to the utility function that already includes leisure in order to provide insight into the equity premium puzzle (while this does not explicitly include habits, it captures the idea of habit formation where previous decisons directly affect today's utility). The simulations for this paper will be based off a labor supply habit formation model as presented by \cite{bover1991relaxing}.
 
-Using the PSID, \cite{bover1991relaxing} estimates structural parameters of a life cycle labor model imposing a Stone-Geary utility function and non-separability between the current labor supply and previous labor supply. This strategy yields reasonable labor supply elasticity estimates, but these calculations depend on the structural estimates that are implausible. In an effort to see the plausibility of the elasticity estimates, we will simulate agents according to \cite{bover1991relaxing}, but restrict some parameters (notably the risk free rate and the psychological discount factor) to the literature standard values.
+Using the Panel Study of Income Dynamics, \cite{bover1991relaxing} estimates structural parameters of a life cycle labor model imposing a Stone-Geary utility function and non-separability between the current labor supply and previous labor supply. This strategy yields reasonable labor supply elasticity estimates, but these calculations depend on the structural estimates that are implausible. In an effort to see the plausibility of the elasticity estimates, we will simulate agents according to \cite{bover1991relaxing}, but restrict some parameters (notably the risk free rate and the psychological discount factor) to the literature standard values.
 
 
 \section{The Problem}
 
 \subsection{Setup}\label{subsec:Setup}
 % adjust this setup to reflect more of what you actually did
-An economic agent must decide how much to consume and work each period. The more this agent chooses to work, the more consumption that this agent gets to do, but this comes at the cost of less leisure time (the other ``good'' that the agent values). Furthermore, the agent has a habit stock in leisure. For the initial setup, let us just assume a finite horizon. The agent looks to maximize the following utility function.
+An economic agent must decide how much to consume and work each period. The more this agent chooses to work, the more consumption that this agent gets to do, but this comes at the cost of less leisure time (the other ``good'' that the agent values). Furthermore, the agent has a habit stock in leisure. Assume a finite horizon. The agent looks to maximize the following utility function.
 \hypertarget{utility}{}
 \begin{verbatimwrite}{\EqDir/utility}
   \begin{align}
-    \sum_{t=0}^{D-t}\beta^t u(c_t, l_t, h_t^l)
+    \sum_{t=0}^{D}\beta^t u(c_t, l_t, h_t^l)
   \end{align}
 \end{verbatimwrite}
 \input{\LtxDir\EqDir/utility}
 
-$D$ denotes the end of the lifetime. Consumption and leisure are denoted by $c_t$ and $l_t$ with $h_t^l$ being the habit stock of leisure. Each future period is psychologically discounted by the term $\beta$ (which is less than 1 because otherwise it would not be discounting the future). An alterntive representation of this discount factor is through the time preference rate, $\rho$, which can be linked to the psychological discount factor as $\beta = \frac{1}{1+\rho}$. We assume that the stock of the habits is equal to the previous period's consumption/leisure.
+$D$ denotes the end of the lifetime. Consumption and leisure are denoted by $c_t$ and $l_t$ with $h_t^l$ being the habit stock of leisure. Each future period is psychologically discounted by the term $\beta$ (which is less than 1 because otherwise it would not be discounting the future). An alterntive representation of this discount factor is through the time preference rate, $\rho$, which can be linked to the psychological discount factor as $\beta = \frac{1}{1+\rho}$. We assume that the stock of the habits is equal to the previous period's leisure.
 
 \hypertarget{habit_stocks}{}
 \begin{verbatimwrite}{\EqDir/habit_stocks}
@@ -124,7 +124,7 @@ The agent will maximize her utility subject to the following budget constraint.
 \end{verbatimwrite}
 \input{\LtxDir\EqDir/budget_constraint}
 
-Equation \eqref{eq:savings} depicts savings equation. Money/assets are denoted by $m$. The income at time $t$ is denoted by $y_t$. Any assets not spent in period $t$ grows by the risk-free rate (denoted by $r$) to be used for the next period. Equation \eqref{eq:earnings} just describes the earnings in each period. The wage (as of now) is constant and denoted by $W$. $T$ describes the total amount of time in a period. Hence $T-l_t$ is the amount of time spent in work. We can combine Equations \eqref{eq:savings} and \eqref{eq:earnings} to have one consolidated budget constraint.
+Equation \eqref{eq:savings} depicts the savings equation. Money/assets are denoted by $m$. The income at time $t$ is denoted by $y_t$. Any assets not spent in period $t$ grows by the risk-free rate (denoted by $r$) to be used in later periods. Equation \eqref{eq:earnings} just describes the earnings in each period. The wage is constant over the life cycle and denoted by $W$. $T$ describes the total amount of time in a period. Hence $T-l_t$ is the amount of time spent in work. We can combine Equations \eqref{eq:savings} and \eqref{eq:earnings} to have one consolidated budget constraint.
 \hypertarget{dbc_single}{}
 \begin{verbatimwrite}{\EqDir/dbc_single}
   \begin{align}
@@ -133,9 +133,9 @@ Equation \eqref{eq:savings} depicts savings equation. Money/assets are denoted b
 \end{verbatimwrite}
 \input{\LtxDir\EqDir/dbc_single}
 
-Strictly speaking, we have some additional constraints that apply to this problem. Leisure is censored by zero and $T$ (it is impossible to have negative leisure or to have more leisure than there is time). However, the censoring is not worrisome for those who choose to work. No one really approaches $T$ labor hours (that's just unrealistic). Since we are only oucesed on the workers at the moment, we are less concerned about selection.  
+Strictly speaking, we have some additional constraints that apply to this problem. Leisure is censored by zero and $T$ (it is impossible to have negative leisure or to have more leisure than there is time). However, the censoring is not worrisome for those who choose to work. No one really approaches $T$ labor hours (that's just unrealistic, especially since leisure is a good that is valued). Since we are only focused on the workers at the moment, we are less concerned about selection.  
 
-To solve this model, using a value function is the way to go. Using \cite{carroll:solvinghabits} and \cite{kubin2002labour} as guides, we can easily solve the model by putting it into Bellman form.
+This model can be expressed recursively (and solved) through using a value function. Using \cite{carroll:solvinghabits} and \cite{kubin2002labour} as guides, we can easily solve the model by putting it into Bellman form.
 
 \hypertarget{bellman}{}
 \begin{verbatimwrite}{\EqDir/bellman}
@@ -166,7 +166,7 @@ The superscripts in Equations \eqref{eq:focc} and \eqref{eq:focl} denote the par
   \end{align}
 \end{verbatimwrite}
 \input{\LtxDir\EqDir/envelope}
-Therefore combining our results from our FOCs (Equations \eqref{eq:focc} and \eqref{eq:focl}) with the Envelope Theorem results (Equations \eqref{eq:env_m} and \eqref{eq:env_h}), we should get the following Euler conditions:
+Combining our results from our FOCs (Equations \eqref{eq:focc} and \eqref{eq:focl}) with the Envelope Theorem results (Equations \eqref{eq:env_m} and \eqref{eq:env_h}), we should get the following Euler conditions:
 
 \hypertarget{eulers}{}
 \begin{verbatimwrite}{\EqDir/eulers}
@@ -177,7 +177,7 @@ Therefore combining our results from our FOCs (Equations \eqref{eq:focc} and \eq
 \end{verbatimwrite}
 \input{\LtxDir\EqDir/eulers}
 
-The Equation \eqref{eq:euler_leisure} is a similar to the optimization condition in classic labor supply theory. In the traditional model, the optimizing behavior equates the ratio of the marginal utilities to the price ratio. By including habits, we gain an extra term that adjusts this condition slightly. As a matter of fact, Equation \eqref{eq:euler_leisure} reduces down to the traditional first order condition when we let $u^h=0$ (or in other words, impose that this model does not have a habit aspect).
+Equation \eqref{eq:euler_leisure} is a similar to the optimization condition in classic labor supply theory. In the traditional model, the optimizing behavior equates the ratio of the marginal utilities to the price ratio. By including habits, we gain an extra term that adjusts this condition slightly. As a matter of fact, Equation \eqref{eq:euler_leisure} reduces down to the traditional first order condition when we let $u^h=0$ (or in other words, impose that this model does not have a habit aspect).
 
 \providecommand{\figName}{stylized_model} % Allows generic definition of hypertargets based on title of figure
 \providecommand{\figFile}{\figName} %  and on filename
@@ -202,20 +202,21 @@ $B_1$ and $B_2$ are taste parameters, and homogeneity is assumed, which means th
   \end{align}
 \end{verbatimwrite}
 \input{\LtxDir\EqDir/sg_eulers}
-While Equation \eqref{eq:sg_euler_c} is a rather standard Euler equation for consumption, the habit in leisure makes Equation \eqref{eq:sg_euler_l} rather complicated. It is further complicated by the presence of a $c_t$ in Equation \eqref{eq:sg_euler_l}. This will prevent us from simplying just using the intertemporal budget constraint to give as a nice closed form solution for consumption. In any case, the difficulty of having a second control variable for this problem will call for some simplications to be made. For the following simulation exercises, I follow \cite{bover1991relaxing}. The only notational discrepancy will occur with regards to the psychological discount factor. 
+While Equation \eqref{eq:sg_euler_c} is a rather standard Euler equation for consumption, the habit in leisure makes Equation \eqref{eq:sg_euler_l} rather complicated. It is further complicated by the presence of a $c_t$. This will prevent us from simplying just using the intertemporal budget constraint to give as a nice closed form solution for consumption. In any case, the difficulty of having a second control variable for this problem will call for some simplications to be made. For the following simulation exercises, I follow \cite{bover1991relaxing}.
+
 \hypertarget{Simulations}{}
 \section{Simulations}
-There are several abstractions made in order to simplify the simulation. In principle, we can allow for the wage to change over the life cycle (and perhaps in later renditions, we will allow for this), but for now, we focus on a constant wage. To obtain estimates of $B_1$ and $B_2$, Bover uses a simple linear regression of demographic observables of which the coefficients on the number of children are reported. Since that is all we have to work with (likely there are other covariates in that regression, but we just do not know their estimated coefficients), we will be restrict our agent to have the mean number of children \footnote{Likely, there my calibration of the $B_1$ and $B_2$ values are slightlty off since the calculated elasticity for the original paper (as reported in Table \ref{tab:elasts} is slightly off. But, the numbers are still extremely close, which provides confidence for a correct replication of the the \cite{bover1991relaxing} results.}. Potentially in a future simulation, we can also adjust the number of children our simulated agent has\footnote{After all, the mean number of children in the original data is between one and two, which means no one actually has the mean number of children}.   
+There are several abstractions made in order to simplify the simulation. In principle, we can allow for the wage to change over the life cycle (and perhaps in later renditions, we will allow for this), but for now, we focus on a constant wage. To obtain estimates of $B_1$ and $B_2$, Bover uses a simple linear regression of demographic observables of which the coefficients on the number of children are reported. Since that is all we have to work with (likely there are other covariates in that regression, but we just do not know their estimated coefficients), we will be restrict our agent to have the mean number of children \footnote{Likely, there my calibration of the $B_1$ and $B_2$ values are slightlty off since the calculated elasticity for the original paper (as reported in Table \ref{tab:elasts} is slightly off. But, the numbers are still extremely close, which provides confidence for a correct replication of the the \cite{bover1991relaxing} results.}. In a future simulation, we can also adjust the number of children of our simulated agent\footnote{After all, the mean number of children in the original data is between one and two, which means no one actually has the mean number of children}.   
 
 In order to ensure consistency, I follow the model solution as described by \cite{bover1991relaxing}. In Column 2 of Table 1 of \cite{bover1991relaxing}, estimates of the structural parameters are presented \footnote{See the ``Original'' row of the Table \ref{tab:calibs} for the point estimates from \cite{bover1991relaxing}. It worth noting that many of the point estimates end up statistically insignificant, but yet it is through these point estimates that the author constructs the elasticity estimates. }.
 \input{\TableDir/calibration_table}
-Originally, \cite{bover1991relaxing} imposed that the psychological discount factor and the risk free rate were the same. While doing so may seem innocuous, point estimates are implausibly large. For instance, the risk-free interest rate falls in the 20\% range. Why work when you can get a 20\% riskless return?
+Originally, \cite{bover1991relaxing} imposed that the psychological discount factor and the risk free rate were the same. While doing so may seem innocuous, point estimates are implausibly large. For instance, the risk-free interest rate falls in the 20\% range. Why work when you can get a 20\% riskless return? Furthermore, as we see from Equation \eqref{eq:sg_euler_c}, the consumption betwwen periods will depend only on the psychological discount factor and the interest rate. By imposing equaility, we should expect no changes in consumption over the life cycle.
 
 Therefore, the motivaiton for conducting simulations is clear. For one, there are natural questions that can be asked since life-cycle figures were not presented. What does this model suggest about life-cycle consumption/labor? How sensitive are the results to change in parameters? Do the life-cycle variables change in expected ways when we adjust the parameters?
 
-In conducting my simulation, I maintain a few simplications. The agent is choosing consumption and labor for a 40-year period. This decision abstracts from reality in two obvious ways. First, there is no mortality (or probability of mortality). Second, the agent does not plan to live for a period of time without work. There is no retirement or no type of Social Security system. Furthermore, these decisions are made with certainty. The agent knows that they will be employed at the same wage. This abstraction prevents job separation and the bargaining for higher wages. Some of these features become more standard in a more contemporary life-cycle labor supply model (see \cite{keane2016labour} for an example of a life-cycle model with these aspects included). Nonetheless, the interesting questions remain and these features provide a foundation for augmenting the habit model for a future project. 
+In conducting my simulation, I maintain a few simplications. The agent is choosing consumption and labor for a 40-year period. This decision abstracts from reality in two obvious ways. First, there is no mortality (or probability of mortality). Second, the agent does not plan to live for a period of time without work. There is no retirement or no type of Social Security system. Furthermore, these decisions are made with certainty. The agent knows that they will be employed at the same wage. This abstraction prevents job separation and the possibility of bargaining for higher wages. Some of these features become more standard in a more contemporary life-cycle labor supply model (see \cite{keane2016labour} for an example of a life-cycle model with these aspects included). Nonetheless, the interesting questions remain and these features provide a foundation for augmenting the habit model for a future project. 
 
-The simulations ran are calibrated according to Table \ref{tab:calibs}. The original row refers to estimated values from \cite{bover1991relaxing}. The ``realistic'' row adjusts the $\rho$ and interest factors to be more standard values. The ``counterfactual'' row adjusts the same two factors as the ``realistic'' column, but also adjusts the habit persistence parameter. Finally, the ``no habits'' row sets the habit persistence variable to zero.
+The simulations ran are calibrated according to Table \ref{tab:calibs}. The ``Original'' row refers to estimated values from \cite{bover1991relaxing}. The ``Realistic I'' row adjusts the $\rho$ and interest factor to more standard values. It is important to note that $rho$ is larger than the risk free rate in this counterfactual.  The ``Realistic II'' row adjusts the same two factors as the ``Realistic I'' row, but reverses the order of the disocunt factor and interest rate, allowing $r > \rho$. Finally, the ``No Habits'' row maintains the calibrations from the ``Realistic I'' row, but also sets the habit persistence variable to zero.
 
 Using these calibrations we are able to simulate the labor hours (and thereby the leisure hours) over the life cycle.
 \renewcommand{\figName}{hours_lc}
@@ -223,34 +224,47 @@ Using these calibrations we are able to simulate the labor hours (and thereby th
 \hypertarget{\figFile}{}
 \input{\FigDir/\figName}
 
-Figure \ref{fig:hours_lc} demonstrates the life cycle labor hours. Most of the specifications have (generally) the ``horseshoe'' shape in labor hours, where hours rise at the beginning of life and then fall towards the end. The Original specification most closely follows this shape by maintaining a consistent amount of hours over the life cycle except at the beginning/end. The realisitc and counterfactual specifications do not really reach a ``steady'' value of labor hours. They increase almost to the very end. A reason for this is that in the original specification, the interest rate is so high, but also being offset by the discount factor. On the other hand, the discount factor is greater in the realistic and counterfactual specifications that cause these agents to prefer consumptionn and leisure today and pay it off later. Perhaps, the most odd is how low labor hours are for the no-habit case. 
+Figure \ref{fig:hours_lc} demonstrates the life cycle labor hours. Most of the specifications have (generally) the ``horseshoe'' shape in labor hours, where hours rise at the beginning of life and then fall towards the end. The Original specification most closely follows this shape by maintaining a consistent amount of hours over the life cycle except at the beginning/end. The ``Realistic II'' specificaiton most closely follows the Original specificaiton, but this is likely due to the fact that the discount factor and the risk free interest rate are calibrated to be very close to each other. The Realistic I calibration seems to produce concave and increasing labor hours over the life cycle (it increases almost to the very end). This shape should be a result of the discount factor exceeding the risk free rate since it causes these agents to prefer consumption and leisure today and pay it off later. Perhaps, the most odd is how low labor hours are for the no-habit case; they are low relative to all other calibrations. 
 
 
 \renewcommand{\figName}{consumption_lc}
 \renewcommand{\figFile}{\figName}
 \hypertarget{\figFile}{}
 \input{\FigDir/\figName}
-Furthermore, Figure \ref{fig:consumption_lc} presents the life-cycle consumption for all the scenarios. Only the original specification seems to produce what we might think of life-cycle consumption. All the other specifications enjoy immense consumption levels early and then must spend time working to pay off those early levels of consumption. What is interesting is that the increase in $\varphi$ in the counterfactual specificaiton leads to much higher consumption. Keep in mind that this is financed by high labor hours over the life-cycle. 
+Furthermore, Figure \ref{fig:consumption_lc} presents the life-cycle consumption for all the scenarios. The  Realistic II calibration seems to produce what we might think of life-cycle consumption. The Original specificatin (as expected) produces constant consumption over the life cycle, which is a result of the discount factor equalling the risk free rate. The Realisitic I and the No Habits specifications enjoy immense consumption levels early and then must spend time working to pay off those early levels of consumption\footnote{Recall that the No Habits calibration is merely the Realistic I calibration with $\varphi=0$. Thus, perhaps it is not that shocking that they look somewhat similar when it comes to consumption since there are no habits formed on consumption in this model.}. Recalling from the labor hours in Figure \ref{fig:hours_lc}, the Realistic I calibration has hte agent working long hours toward the end of the life cycle. Doing so, allows agents to consume high amounts in the early periods of life (especially since they are discounting pyschologically more than the interest rate) financed by labor later in life. Given the decreasing nature of the Realistic I and No Habits models, we might not be willing to accept the calibrations for these specificaitons. 
 
-% talk more about this
 
-The key conslusion from \cite{bover1991relaxing} is that the including habits produces reasonable labor supply elasticity estimates. Those elasticities are recreated in Table \ref{tab:elasts}. 
+
+The key conslusion from \cite{bover1991relaxing} is that including habits produces reasonable labor supply elasticity estimates. Bover presents three different elasitcities, but only two remain relevant for this situation of a constant wage. The first elasitcity is the marginal-utility-of-wealth-constant elasticity (which will be denoted by $\epsilon$) and is calcualted using the following formula:
+\begin{verbatimwrite}{\EqDir/epsilon_elast}
+  \begin{align}
+    \epsilon &= \left( \frac{\gamma_h + \varphi h_{t-1}}{h_t} \right) -1 \label{eq:epsilon_elast}
+  \end{align}
+\end{verbatimwrite}
+\input{\LtxDir\EqDir/epsilon_elast}
+where $h_i$ denotes the labor hours in period $i$ (note that there is no superscript over $h_i$ since the superscritted version denotes the habit stock). Naturally, since the above elasticity assumes that wealth is constant, Bover presents another elasticity on the effect of changing the slope and the intercept of the wage profile. Since in our setting it is  assumed that the slope of the wage profile is zero (because we assume a constant wage over the life cycle), I primarily focus on the effect of changing the intercept (i.e. the starting wage) and allowing that to have an effect on the total wealth. The value of this elasiticity (which is denoted by $\eta^\alpha$) is calculated by \footnote{There is a slight discrepancy between Equation \eqref{eq:eta_elast} and the elasticity presented by Bover, but this because of the assumption on a constant wage over the life cycle.}:
+\begin{verbatimwrite}{\EqDir/eta_elast}
+  \begin{align}
+\eta^\alpha &= -B_1 \left(\gamma_h + \varphi \frac{r}{1+r}h_{t-1} \right)\frac{1}{h_t} \label{eq:eta_elast}
+  \end{align}
+\end{verbatimwrite}
+\input{\LtxDir\EqDir/eta_elast}
+
+    Those elasticities are recreated in Table \ref{tab:elasts}. 
 \input{\TableDir/elast_table}
-
-
+Both elasticites for the original specificaiton are very close to the reported elasiticities in \cite{bover1991relaxing}, which is reassuring. Our counterfactuals produce similar estimates of elasiticies. This suggests that calibrating the psychological discount factor and risk free rate to more standard values seems to still produce similar values for the elasticities. 
 
 \hypertarget{Conclusions}{}
 \section{Conclusions}
 
-While some of the life cycle trends in some of the simulations appear to create some perhaps unintuitive trends, the increases in the elasticities after adjusting some of the parameters of the model may suggest that the habit in labor supply model does not capture the historically small labor supply elasticities. However, true elasiticities are not based on a world where all the agents know exactly how things are going to play out. For that matter, consumption and labor hour decisions can never be made with perfect confidence on how the world will work. Perhaps the peculiarities are due to the assumptions of perfect foresight. Therefore, a natural (more computationally intensive approach) will introduce uncertainty into the model.
+While some of the life cycle trends in some of the simulations appear to create some perhaps unintuitive trends, the elasticities after adjusting some of the parameters of the model may suggest that the habit in labor supply model continues to capture the historically small labor supply elasticities. However, true elasiticities are not based on a world where all the agents know exactly how things are going to play out. For that matter, consumption and labor hour decisions can never be made with perfect confidence on how the world will work. Perhaps the peculiarities are due to the assumptions of perfect foresight. Therefore, a natural (more computationally intensive approach) will introduce uncertainty into the model.
 
 
-There are many directions that further simulations can go. In remaining in a perfect foresight case, the first changes would be to have a more realistic wage process. Wages change throughout people's life cycles and even if we had perfect foresight, this clearly influences our decisions today knowing that there would be higher wages in the future. Even with higher wage growth, there is still likely uncertainty as to how much th wage will grow in any given period (or if an observed increase in the wage is transitory or permanent). 
+There are many directions that further simulations can go. In remaining in a perfect foresight case, the first changes would be to have a more realistic wage process. Wages change throughout people's life cycles and even if we had perfect foresight, this clearly influences our decisions today knowing that there would be higher wages in the future. Even with higher wage growth, there is still likely uncertainty as to how much the wage will grow in any given period (or if an observed increase in the wage is transitory or permanent). 
 
 Furthermore, as mentioned before, there are other aspects to people's life cycle decisions that we might want to include. Other choice variables could be a human capital component, which would make wages (or wage growth) endogenous to an investment in schooling or training. The goal here would be to see how the habits model is better or worse equipped to answer questions of human capital investment compared to the traditional models. Perhaps the habits model may be appropriate in a human capital/schooling context since one could argue that agents who go to school for long periods of time are accustomed to longer working hours and continue to work such hours once in the labor market (i.e. a habit).
 
 Another example of an additional choice variable could be a portfolio. While the current model only allow assets to accumulate according to the risk free rate, perhaps a portfolio allocation might also be important. While this may seem like an intense addition to the model, it could be implemented in a sort of simpler fashion, such as a private pension (as in \cite{keane2016labour}). In this case, the private pension would have a stochastic return (like the stock market) with an expected premium higher than the risk free rate. Incorportating this into a labor supply model will impact the labor supply decision.
-
 
 % %The paper's results are all easily reproducible \href{https://econ-ark.org/_materials/BufferStockTheory?launch}{interactively on the web} or \href{https://github.com/econ-ark/BufferStockTheory}{on any standard computer system}.  Such reproducibility reflects the paper's use of the open-source \href{https://econ-ark.org}{Econ-ARK} toolkit, which is used to generate all of the quantitative results of the paper, and which integrally incorporates all of the analytical insights of the paper.
 
